@@ -16,7 +16,7 @@ TERM = FACTOR, { ("\*" | "/" | "and"), FACTOR } ;
 FACTOR = NUMBER | STRING | IDENTIFIER | ("+" | "-" | "not"), FACTOR) | "in", "(", ")" | "(", RELEXPRESSION, ")" ;  
 IDENTIFIER = LETTER, { LETTER | "\_" } ;  
 NUMBER = DIGIT, { DIGIT }, {",", DIGIT};  
-STRING = LETTER, { LETTER } ;  
+STRING = """, LETTER | DIGIT, { LETTER | DIGIT}, """;  
 LETTER = ( a | ... | z  ) ;  
 DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
 
