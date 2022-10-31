@@ -1,3 +1,7 @@
+----------
+
+**Language EBNF:**
+
 BLOCK = "{", { STATEMENT }, "}" ;  
 STATEMENT = ( { ASSIGNMENT | PRINT }, ";") | BLOCK | WHILE | IF | TYPE ;  
 WHILE = "loop", "(", RELEXPRESSION, ")" , STATEMENT ;  
@@ -14,4 +18,6 @@ IDENTIFIER = LETTER, { LETTER | "\_" } ;
 NUMBER = DIGIT, { DIGIT }, {",", DIGIT};  
 STRING = LETTER, { LETTER } ;  
 LETTER = ( a | ... | z  ) ;  
-DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;  
+DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
+
+-----------
