@@ -4,7 +4,7 @@
 
 SYNTAX = { DEF }, BLOCK ;  
 DEF = ("i32" | "String" | "Void" | Float"), IDENTIFIER, "(", { ATT, { ",", ATT } }, ")", BLOCK ;  
-ATT = ("i32" | "String" | "Float"), IDENTIFIER ;
+ATT = ("i32" | "String" | "Float"), IDENTIFIER ;  
 BLOCK = "{", { STATEMENT }, "}" ;  
 STATEMENT = ( { ASSIGNMENT | PRINT }, ";") | BLOCK | WHILE | IF | TYPE ;  
 WHILE = "loop", "(", RELEXPRESSION, ")" , STATEMENT ;  
@@ -18,8 +18,8 @@ RELEXPRESSION = FACTOR, { ("==" | "!=" | ">" | "<" | ">=" | "<=" | "+"), FACTOR 
 TERM = FACTOR, { ("\*" | "/" | "and"), FACTOR } ;  
 FACTOR = NUMBER | STRING | IDENTIFIER | ("+" | "-" | "not"), FACTOR) | "in", "(", ")" | "(", RELEXPRESSION, ")" ;  
 IDENTIFIER = LETTER, { LETTER | "\_" } ;  
-NUMBER = DIGIT, { DIGIT }, {",", DIGIT};  
-STRING = """, LETTER | DIGIT, { LETTER | DIGIT}, """;  
+NUMBER = DIGIT, { DIGIT }, {",", DIGIT} ;   
+STRING = """, LETTER | DIGIT, { LETTER | DIGIT}, """ ;  
 LETTER = ( a | ... | z  ) ;  
 DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
 
