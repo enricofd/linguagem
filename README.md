@@ -2,8 +2,8 @@
 
 **Language EBNF:**
 
-SYNTAX = { DEF }, BLOCK ;
-DEF = ("i32" | "String" | "Void" | Float"), IDENTIFIER, "(", { ATT, { ",", ATT } }, ")", BLOCK;
+SYNTAX = { DEF }, BLOCK ;  
+DEF = ("i32" | "String" | "Void" | Float"), IDENTIFIER, "(", { ATT, { ",", ATT } }, ")", BLOCK;  
 ATT = ("i32" | "String" | "Float"), IDENTIFIER ;
 BLOCK = "{", { STATEMENT }, "}" ;  
 STATEMENT = ( { ASSIGNMENT | PRINT }, ";") | BLOCK | WHILE | IF | TYPE ;  
