@@ -3,10 +3,10 @@
 **Language EBNF:**
 
 SYNTAX = { DEF }, BLOCK ;  
-DEF = ("i32" | "String" | "Void" | Float"), IDENTIFIER, "(", { ATT, { ",", ATT } }, ")", BLOCK ;  
+DEF = ("i32" | "String" | "Void" | Float"), IDENTIFIER, "(", { ATT, { ",", ATT } }, ")", BLOCK , { "return", { IDENTIFIER | FLOAT | INT | STRING } }, ";" ;
 ATT = ("i32" | "String" | "Float"), IDENTIFIER ;  
 BLOCK = "{", { STATEMENT }, "}" ;  
-STATEMENT = ( { ASSIGNMENT | PRINT }, ";") | BLOCK | WHILE | IF | TYPE ;  
+STATEMENT = ( { ASSIGNMENT | PRINT }, ";") | BLOCK | WHILE | IF | TYPE ;
 WHILE = "loop", "(", RELEXPRESSION, ")" , STATEMENT ;  
 IF = "condition", "(", RELEXPRESSION, ")" , STATEMENT) , { "exception", STATEMENT } ;  
 TYPE = "var", IDENTIFIER, { ",", OIDENTIFIER }, { ":", ("i32" | "String" | "Float") } ;  
@@ -14,12 +14,13 @@ OIDENTIFIER = IDENTIFIER, "," ;
 ASSIGNMENT = IDENTIFIER, "=", RELEXPRESSION ;  
 PRINT = "out", "(", RELEXPRESSION, ")" ;  
 EXPRESSION = TERM, { ("+" | "-" | "or" ), TERM } ;  
-RELEXPRESSION = FACTOR, { ("==" | "!=" | ">" | "<" | ">=" | "<=" | "+"), FACTOR } ;  
+RELEXPRESSION = EXPRESSION, { ("==" | "!=" | ">" | "<" | ">=" | "<=" | "+"), EXPRESSION } ;  
 TERM = FACTOR, { ("\*" | "/" | "and"), FACTOR } ;  
-FACTOR = NUMBER | STRING | IDENTIFIER | ("+" | "-" | "not"), FACTOR) | "in", "(", ")" | "(", RELEXPRESSION, ")" ;  
+FACTOR = FLOAT | INT | STRING | IDENTIFIER | ("+" | "-" | "not"), FACTOR) | "in", "(", ")" | "(", RELEXPRESSION, ")" ;
 IDENTIFIER = LETTER, { LETTER | "\_" } ;  
-NUMBER = DIGIT, { DIGIT }, {",", DIGIT} ;   
-STRING = """, LETTER | DIGIT, { LETTER | DIGIT}, """ ;  
+FLOAT = { DIGIT }, ".", DIGIT ;
+INT = DIGIT ;
+STRING = """, { LETTER | DIGIT}, """ ;
 LETTER = ( a | ... | z  ) ;  
 DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
 
