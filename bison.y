@@ -5,9 +5,9 @@
 %}
 
 %token INT STR FLOAT ID
-%token INTTYPE STRTYPE FLOATTYPE VOIDTYPE
+%token INTTYPE STRTYPE VOIDTYPE
 %token READ PRINT IF ELSE WHILE
-%token BIG SMALL BIGEQ SMALLEQ EQUAL DIFF OR AND NOT
+%token BIG SMALL EQUAL OR AND NOT
 %token ASSIGNEMENT VAR COMMA DEFINE SEMI RETURN
 %token LPAR RPAR LCB RCB MULT DIV PLUS MINUS
 
@@ -21,7 +21,6 @@ syntax : def block
 
 types : INTTYPE
       | STRTYPE
-      | FLOATTYPE
       | VOIDTYPE
       ;
 
@@ -37,7 +36,6 @@ return_value :
              ;
 
 values : ID
-       | FLOAT
        | STR
        | INT
        ;
@@ -76,10 +74,7 @@ optional_type :
 relexpression : expression
               | expression BIG expression
               | expression SMALL expression
-              | expression BIGEQ expression
-              | expression SMALLEQ expression
               | expression EQUAL expression
-              | expression DIFF expression
               ;
 
 expression : term
