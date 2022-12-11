@@ -26,10 +26,7 @@
 
 ">"                   return BIG;
 "<"                   return SMALL;
-">="                  return BIGEQ;
-"<="                  return SMALLEQ;
 "=="                  return EQUAL;
-"!="                  return DIFF;
 "or"                  return OR;
 "and"                 return AND;
 "not"                 return NOT;
@@ -43,13 +40,11 @@
 
 "i32"                 return INTTYPE;
 "String"              return STRTYPE;
-"Float"               return FLOATTYPE;
 "Void"                return VOIDTYPE;
 
 [0-9]+                return INT;
-[a-z0-9]              return STR;
-[0-9]*[.][0-9]        return FLOAT;
-[a-z][_a-z0-9]        return ID;
+[a-Z0-9]              return STR;
+[a-Z][_a-Z0-9]        return ID;
 
 .                     printf("Token not acceptable!"); yyterminate();
 

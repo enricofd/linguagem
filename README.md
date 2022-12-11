@@ -1,27 +1,30 @@
-----------
-
 **Language EBNF:**
 
-SYNTAX = { DEF }, BLOCK ;  
-DEF = ("i32" | "String" | "Void" | Float"), IDENTIFIER, "(", { ATT, { ",", ATT } }, ")", BLOCK , { "return", { IDENTIFIER | FLOAT | INT | STRING } }, ";" ;
-ATT = ("i32" | "String" | "Float"), IDENTIFIER ;  
+PROGRAM = "{", { DECLARATION }, "}" ;  
 BLOCK = "{", { STATEMENT }, "}" ;  
-STATEMENT = ( { ASSIGNMENT | PRINT }, ";") | BLOCK | WHILE | IF | TYPE ;
+DECLARATION = "fn", IDENTIFIER, "(", { ARGS, { ARGS, ";" } }, ")", { "->", TYPE }, BLOCK ;  
+ARGS = IDENTIFIER, { ",", IDENTIFIER }, ":", TYPE ;  
+STATEMENT = ({ASSIGNMENT | PRINT | RETURN }, ";") | BLOCK | WHILE | IF | TYPE ;  
+RETURN = "return", RELEXPRESSION ;  
 WHILE = "loop", "(", RELEXPRESSION, ")" , STATEMENT ;  
 IF = "condition", "(", RELEXPRESSION, ")" , STATEMENT) , { "exception", STATEMENT } ;  
-TYPE = "var", IDENTIFIER, { ",", OIDENTIFIER }, { ":", ("i32" | "String" | "Float") } ;  
+TYPE = "var", IDENTIFIER, { ",", OIDENTIFIER }, ":", ("i32" | "String") ;  
 OIDENTIFIER = IDENTIFIER, "," ;  
-ASSIGNMENT = IDENTIFIER, "=", RELEXPRESSION ;  
+ASSIGNMENT = IDENTIFIER, ("=", RELEXPRESSION) | FUNCCALL ;  
+FUNCCALL = "(", { RELEXPRESSION , { ",", RELEXPRESSION} }, ")" ;  
 PRINT = "out", "(", RELEXPRESSION, ")" ;  
-EXPRESSION = TERM, { ("+" | "-" | "or" ), TERM } ;  
-RELEXPRESSION = EXPRESSION, { ("==" | "!=" | ">" | "<" | ">=" | "<=" | "+"), EXPRESSION } ;  
+EXPRESSION = TERM, { ("+" | "-" | "or"), TERM } ;  
+RELEXPRESSION = FACTOR, { ("==" | ">" | "<" | "+"), FACTOR } ;  
 TERM = FACTOR, { ("\*" | "/" | "and"), FACTOR } ;  
-FACTOR = FLOAT | INT | STRING | IDENTIFIER | ("+" | "-" | "not"), FACTOR) | "in", "(", ")" | "(", RELEXPRESSION, ")" ;
-IDENTIFIER = LETTER, { LETTER | "\_" } ;  
-FLOAT = { DIGIT }, ".", DIGIT ;
-INT = DIGIT ;
-STRING = """, { LETTER | DIGIT}, """ ;
-LETTER = ( a | ... | z  ) ;  
+FACTOR = NUMBER | STRING | IDENTIFIER, { FUNCCALL } | ("+" | "-" | "not"), FACTOR) | "in" , "(", ")" | "(", RELEXPRESSION, ")" ;  
+IDENTIFIER = LETTER, { LETTER | DIGIT | "\_" } ;  
+NUMBER = DIGIT, { DIGIT } ;  
+STRING = """, LETTER | DIGIT, { LETTER | DIGIT}, """;  
+LETTER = ( a | ... | z | A | ... | Z ) ;
 DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 ) ;
 
------------
+---
+
+**TEST:**
+
+Run python3 test.py
